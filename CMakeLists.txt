@@ -3,4 +3,6 @@ project(ProiectUnversitate C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ProiectUnversitate main.c utility.h)
+add_executable(ProiectUnversitate main.c utility.h )
+target_link_libraries(ProiectUnversitate m)
+
