@@ -9,8 +9,8 @@ Datele de intrare se citesc din fisier "input.txt" in urmatorul format:
 <li>calea unde va fi salvata imaginea decriptata
 <li>calea spre fiser txt cu cele 2 chei separate prin spatiu
 <li>calea spre imaginea asupra careia va fi aplicata template matching
-<li>nr de imagini template (0<nr<=10)
-<li><li>urmatoare nr linii contin drumul spre imaginile sablon
+<li>nr de imagini template 0 < nr <= 10
+<li>urmatoare nr linii contin drumul spre imaginile sablon
 <li>calea unde va fi salvata imaginea finala dupa template matching
 
 </ol>
@@ -36,10 +36,10 @@ A nu se lasa rand nou liber la sfarsit de input.txt
 </ol>
 
 <h4>Explicatii</h4>
-Pentru retinerea pixelilor s-a folosit o uniune cu o structura inauntru
-Pentru retinerea imaginii s-a folosit o structura ce contine header dimensiuni si pointer la tabloul de pixelii cat si la matrice
-Matricea de pixeli este compacta construita din tablou, acceasi memorie, nu se face copie
-Ce se schimba in matrice se schimba in tablou si invers
+Pentru retinerea pixelilor s-a folosit o uniune cu o structura inauntru.
+Pentru retinerea imaginii s-a folosit o structura ce contine header dimensiuni si pointer la tabloul de pixelii cat si la matrice.
+Matricea de pixeli este compacta construita din tablou, acceasi memorie, nu se face copie.
+Ce se schimba in matrice se schimba in tablou si invers.
 
 
 <h4>Note:</h4>
@@ -47,6 +47,6 @@ Ce se schimba in matrice se schimba in tablou si invers
 <li>Compilat si testat cu gcc pe Linux/Ubuntu 18
 <li>A se adauga "-lm" la compilarea cu gcc in caz de eroare legata de "sqrt"
 <li>Nu s-au facut validari ale input ului, a se introduce doar date corecte
-<li>Memory leak check leak inclus in valgrind-out.txt, nu sunt memory leaks
+<li>Memory leak check inclus in valgrind-out.txt, nu sunt memory leaks
 <li>Comment-urile din cod sunt in format doxygen
 </ul>
