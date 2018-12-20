@@ -36,6 +36,7 @@ A nu se lasa rand nou liber la sfarsit de input.txt
 </ol>
 
 <h4>Explicatii</h4>
+Imaginea se citeste initial in ordine corecta fara a se face inversari ulterioare.
 Pentru retinerea pixelilor s-a folosit o uniune cu o structura inauntru.
 Pentru retinerea imaginii s-a folosit o structura ce contine header dimensiuni si pointer la tabloul de pixelii cat si la matrice.
 Matricea de pixeli este compacta construita din tablou, acceasi memorie, nu se face copie.
@@ -50,3 +51,4 @@ Ce se schimba in matrice se schimba in tablou si invers.
 <li>Memory leak check inclus in valgrind-out.txt, nu sunt memory leaks
 <li>Comment-urile din cod sunt in format doxygen
 </ul>
+

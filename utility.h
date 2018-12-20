@@ -9,7 +9,7 @@
 #define WIDTH_OFFSET 18
 #define HEIGHT_OFFSET 22
 #define HEADER_SIZE 54
-#define DEFAULT_THRESHOLD 0.5
+#define DEFAULT_CORRELATION_THRESHOLD 0.5
 #define OVERLAPPING_THRESHOLD 0.2
 #define BUFFER_SIZE 200
 
@@ -22,7 +22,7 @@ typedef unsigned char uchar;
 
 /**
  * struct pentru Pixeli
- * 3 metoda de a accesa
+ * 3 metode de a accesa
  * cu tablou colors
  * cu struct color.culoare (R, G, B)
  * cu grey daca imaginea e grayscale

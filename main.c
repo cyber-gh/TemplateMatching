@@ -61,7 +61,7 @@ void loadSecretKeys(char *keyPath, uint *key_1, uint *key_2) {
     FILE *fin = fopen(keyPath, "r");
     if (fin == NULL) {
         printf("ERROR: can't open secret keys file\n");
-        exit(0);
+        exit(-1);
     }
     fscanf(fin, "%u %u", key_1, key_2);
 
@@ -80,7 +80,7 @@ Image_ptr loadBMPImage(char *path) {
     FILE *fin = fopen(path, "rb");
     if (fin == NULL) {
         printf("ERROR: can't open the bmp image file = %s", path);
-        exit(0);
+        exit(-1);
     }
     Image_ptr img = malloc(sizeof(Image));
 
@@ -384,6 +384,7 @@ double avgGrayIntensity(Window window) {
     return sum;
 
 }
+
 /**
  * @deprecated
  * constuieste matrice de pixeli din imagine copiind valorile
@@ -417,7 +418,6 @@ void buildSmartMatrixImg(Image_ptr img) {
         img->pixelsM[i] = (img->pixels + img->width * i);
     }
 }
-
 
 
 /**
@@ -638,11 +638,11 @@ void copyArray(DetectionArr *destination, DetectionArr *source) {
 DetectionArr getAllDetections(Image_ptr img, char paths[][BUFFER_SIZE], int nr) {
 
     int k = 0;
-    DetectionArr arr = getDetections(img, paths[0], 0, DEFAULT_THRESHOLD);
+    DetectionArr arr = getDetections(img, paths[0], 0, DEFAULT_CORRELATION_THRESHOLD);
     DetectionArr tempArr;
     int i;
     for (i = 1; i < nr; i++) {
-        tempArr = getDetections(img, paths[i], i, DEFAULT_THRESHOLD);
+        tempArr = getDetections(img, paths[i], i, DEFAULT_CORRELATION_THRESHOLD);
         copyArray(&arr, &tempArr);
     }
 
@@ -703,9 +703,11 @@ double overlap(Detection a, Detection b) {
  */
 
 int intersect(Detection a, Detection b) {
-    Point l2 = {a.leftUpCorner.x, a.rightDownCorner.y}, r2 = {a.rightDownCorner.x, a.leftUpCorner.y};
+    Point l2 = {a.leftUpCorner.x, a.rightDownCorner.y},
+            r2 = {a.rightDownCorner.x, a.leftUpCorner.y};
 
-    Point l1 = {b.leftUpCorner.x, b.rightDownCorner.y}, r1 = {b.rightDownCorner.x, b.leftUpCorner.y};
+    Point l1 = {b.leftUpCorner.x, b.rightDownCorner.y},
+            r1 = {b.rightDownCorner.x, b.leftUpCorner.y};
 
     if (l1.x >= r2.x || l2.x >= r1.x)
         return 0;
@@ -749,12 +751,11 @@ DetectionArr removeOverlapping(DetectionArr detArr) {
 }
 
 
-
 int main() {
 
     FILE *fin = fopen(INPUT_FILE_PATH, "r");
     if (fin == NULL) {
-        printf("ERROR: Can't open input file");
+        printf("ERROR: Can't open input file: %s", INPUT_FILE_PATH);
         exit(-1);
     }
 
