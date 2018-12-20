@@ -194,7 +194,7 @@ uint *getRandomPermutation(uint *randomArr, uint size) {
  * @param img pointer la imaginea din ram
  * @param randomPermutation tablou cu permutare random
  */
-void permutePixels(Image_ptr img, uint *randomPermutation) {
+void dePermutePixels(Image_ptr img, uint *randomPermutation) {
 
     Pixel *permutedPixels = calloc(img->size, sizeof(Pixel));
     uint size = img->size;
@@ -205,7 +205,6 @@ void permutePixels(Image_ptr img, uint *randomPermutation) {
     free(img->pixels);
     img->pixels = permutedPixels;
 
-
 }
 
 /**
@@ -213,7 +212,7 @@ void permutePixels(Image_ptr img, uint *randomPermutation) {
  * @param img pointer la imaginea din ram
  * @param randomPermutation tablou cu permutarea aleatorie
  */
-void dePermutePixels(Image_ptr img, uint *randomPermutation) {
+void permutePixels(Image_ptr img, uint *randomPermutation) {
     Pixel *Pixels = calloc(img->size, sizeof(Pixel));
     uint size = img->size;
     uint i;
@@ -233,9 +232,9 @@ Pixel numberToPixel(uint nr) {
     PixelKey fakePixel;
     fakePixel.key = nr;
     Pixel pix;
-    pix.colors[0] = fakePixel.colors[0];
-    pix.colors[2] = fakePixel.colors[1];
-    pix.colors[1] = fakePixel.colors[2];
+    pix.colors[2] = fakePixel.colors[0];
+    pix.colors[1] = fakePixel.colors[1];
+    pix.colors[0] = fakePixel.colors[2];
     return pix;
 }
 
@@ -257,7 +256,6 @@ void xorEncryptImage(Image_ptr img, uint *randArr, uint key) {
         xor(img->pixels[i], img->pixels[i - 1]);
         xor(img->pixels[i], randomNr);
     }
-
 
 }
 
@@ -749,6 +747,8 @@ DetectionArr removeOverlapping(DetectionArr detArr) {
     return newArr;
 
 }
+
+
 
 int main() {
 
