@@ -15,7 +15,9 @@
 
 #define xor(a, b) (a.colors[0]^=b.colors[0], a.colors[1]^=b.colors[1], a.colors[2]^=b.colors[2])
 
-const char INPUT_FILE_PATH[] = "input.txt";
+// ---------------------------- Schimba fisierul de input aici ------------------------------------
+const char INPUT_FILE_PATH[] = "input_linux.txt";
+// ---------------------------- Schimba fisierul de input aici ------------------------------------
 
 typedef unsigned int uint;
 typedef unsigned char uchar;
