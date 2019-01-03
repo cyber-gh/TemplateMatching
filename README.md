@@ -46,6 +46,7 @@ Ce se schimba in matrice se schimba in tablou si invers.
 <h4>Note:</h4>
 <ul>
 <li>Compilat si testat cu gcc pe Linux/Ubuntu 18
+<li> IDE: CLion 2018
 <li>A se adauga "-lm" la compilarea cu gcc in caz de eroare legata de "sqrt"
 <li>Nu s-au facut validari ale input ului, a se introduce doar date corecte
 <li>Memory leak check inclus in valgrind-out.txt, nu sunt memory leaks

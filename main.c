@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <math.h>
-#include <assert.h>
 
 #include "utility.h"
 
@@ -492,6 +491,7 @@ double crossCorrelation(Window template, Window target) {
         }
     }
     res /= (double) template.size;
+
     return res;
 }
 
@@ -584,6 +584,7 @@ Detection convertDetection(Window targetWindow, int nr, double accuracy) {
  */
 DetectionArr getDetections(Image_ptr target, char *path_to_template, int nr, double threshold) {
     Image_ptr templateImg = loadBMPImage(path_to_template);
+    toGrayscale(templateImg);
     Detection *detArr = calloc(1, sizeof(Detection));
     int numberOfDetections = 0;
     double res;
@@ -600,7 +601,6 @@ DetectionArr getDetections(Image_ptr target, char *path_to_template, int nr, dou
             targetWindow.mid.y = j;
 
             res = crossCorrelation(templateWindow, targetWindow);
-
             if (res > threshold) {
                 Detection detection = convertDetection(targetWindow, nr, res);
                 numberOfDetections++;
@@ -638,10 +638,12 @@ void copyArray(DetectionArr *destination, DetectionArr *source) {
 DetectionArr getAllDetections(Image_ptr img, char paths[][BUFFER_SIZE], int nr) {
 
     int k = 0;
+    printf("Getting detectiosn for digit 0\n");
     DetectionArr arr = getDetections(img, paths[0], 0, DEFAULT_CORRELATION_THRESHOLD);
     DetectionArr tempArr;
     int i;
     for (i = 1; i < nr; i++) {
+        printf("Getting detections for digit %d\n", i);
         tempArr = getDetections(img, paths[i], i, DEFAULT_CORRELATION_THRESHOLD);
         copyArray(&arr, &tempArr);
     }
@@ -803,7 +805,6 @@ int main() {
     fscanf(fin, "%d", &nr_templates);
     fgetc(fin);
     printf("Nr templates = %d\n", nr_templates);
-    assert(nr_templates > 0 && "Can't have empty templates\n");
     char path_templates[nr_templates][BUFFER_SIZE];
     int i;
     for (i = 0; i < nr_templates; i++) {
@@ -811,6 +812,7 @@ int main() {
         path_templates[i][strlen(path_templates[i]) - 1] = '\0';
     }
     Image_ptr img = loadBMPImage(target_image_path);
+    toGrayscale(img);
 
     char path_target_draw_optim[BUFFER_SIZE];
 
